@@ -1,5 +1,7 @@
-import 'package:e_waris/contants/app_colors.dart';
+
 import 'package:flutter/material.dart';
+
+import 'core/contants/app_colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,66 +20,70 @@ class MyApp extends StatelessWidget {
       //   colorScheme: .fromSeed(seedColor: AppColors.genever),
       //
       // ),
-       theme: ThemeData(
-      useMaterial3: true,
-
-      // Primary Color Scheme
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: AppColors.genever,
-        brightness: Brightness.light,
-      ),
-
-      // Scaffold Background
-      scaffoldBackgroundColor: Colors.white,
-
-      // AppBar Theme
-      appBarTheme: const AppBarTheme(
-        backgroundColor:  AppColors.genever,
-        foregroundColor: Colors.white,
-        centerTitle: true,
-        elevation: 0,
-      ),
-
-      // Elevated Button Theme
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          backgroundColor:  AppColors.genever,
-          foregroundColor: Colors.white,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 14,
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-      ),
-
-      // Input Decoration Theme
-      inputDecorationTheme: InputDecorationTheme(
-        focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            color:  AppColors.genever,
-            width: 2,
-          ),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.grey.shade300,
-          ),
-          borderRadius: BorderRadius.circular(12),
-        ),
-      ),
-
-      // Floating Action Button Theme
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        backgroundColor:  AppColors.genever,
-        foregroundColor: Colors.white,
-      ),
-    ),
+       theme: buildThemeData(),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
+  }
+
+  ThemeData buildThemeData() {
+    return ThemeData(
+    useMaterial3: true,
+
+    // Primary Color Scheme
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: AppColors.kCWhite,
+      brightness: Brightness.light,
+    ),
+
+    // Scaffold Background
+    scaffoldBackgroundColor: Colors.white,
+
+    // AppBar Theme
+    appBarTheme: const AppBarTheme(
+      backgroundColor:  AppColors.kCPrimary,
+      foregroundColor: Colors.white,
+      centerTitle: true,
+      elevation: 0,
+    ),
+
+    // Elevated Button Theme
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor:  AppColors.kCWhite,
+        foregroundColor: Colors.white,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 14,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+    ),
+
+    // Input Decoration Theme
+    inputDecorationTheme: InputDecorationTheme(
+      focusedBorder: OutlineInputBorder(
+        borderSide: const BorderSide(
+          color:  AppColors.kCWhite,
+          width: 2,
+        ),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.grey.shade300,
+        ),
+        borderRadius: BorderRadius.circular(12),
+      ),
+    ),
+
+    // Floating Action Button Theme
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor:  AppColors.kCWhite,
+      foregroundColor: Colors.white,
+    ),
+  );
   }
 }
 
