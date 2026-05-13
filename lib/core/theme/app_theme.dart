@@ -1,4 +1,5 @@
 import 'package:e_waris/core/contants/app_colors.dart';
+import 'package:e_waris/core/contants/app_fonts.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
@@ -25,13 +26,14 @@ class AppTheme {
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.kCPrimary,
         foregroundColor: AppColors.kCWhite,
-        minimumSize: const Size(double.infinity, 55),
+        //minimumSize: const Size(double.infinity, 40),
+        // Remove fixed width
+        minimumSize: Size.zero,
         padding: const EdgeInsets.symmetric(
           horizontal: 20,
-          vertical: 14,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(5),
         ),
       ),
     ),
@@ -57,5 +59,68 @@ class AppTheme {
       foregroundColor: Colors.white,
     ),
 
+    textTheme: const TextTheme(
+
+      // Large Heading
+      headlineLarge: TextStyle(
+        fontSize: 30,
+        fontFamily: AppFonts.robotoExtraBold,
+        color: Colors.black,
+      ),
+
+      // Medium Heading
+      headlineMedium: TextStyle(
+        fontSize: 24,
+        fontFamily: AppFonts.robotoBold,
+        color: Colors.black,
+      ),
+
+      // Small Heading
+      headlineSmall: TextStyle(
+        fontSize: 18,
+        fontFamily: AppFonts.robotoBold,
+        color: Colors.black,
+      ),
+
+      // Title
+      titleLarge: TextStyle(
+        fontSize: 18,
+        fontFamily: AppFonts.robotoSemiBold,
+        color: Colors.black,
+      ),
+
+      titleMedium: TextStyle(
+        fontSize: 16,
+        fontFamily: AppFonts.robotoSemiBold,
+        color: Colors.black87,
+      ),
+
+      titleSmall: TextStyle(
+        fontSize: 14,
+        fontFamily: AppFonts.robotoSemiBold,
+        color: Colors.black87,
+      ),
+
+      // Body Text
+      bodyLarge: TextStyle(
+        fontSize: 15,
+        fontFamily: AppFonts.robotoSemiBold,
+        color: Colors.black,
+      ),
+
+      bodyMedium: TextStyle(
+        fontSize: 15,
+        fontFamily: AppFonts.robotoRegular,
+        color: Colors.black87,
+      ),
+
+      // Button Text
+      labelLarge: TextStyle(
+        fontSize: 14,
+        fontFamily: AppFonts.robotoSemiBold,
+        color: Colors.black,
+      ),
+      
+    ),
   );
-}
+  }

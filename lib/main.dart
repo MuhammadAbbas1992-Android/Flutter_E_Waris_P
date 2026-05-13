@@ -1,4 +1,6 @@
 
+import 'package:e_waris/providers/auth_providers.dart';
+import 'package:e_waris/views/splash/splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => AuthProviders()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
