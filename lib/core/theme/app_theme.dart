@@ -48,7 +48,7 @@ class AppTheme {
       ),
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(
-          color: Colors.grey.shade300,
+          color: AppColors.kCGrey,
         ),
         borderRadius: BorderRadius.circular(12),
       ),
@@ -120,7 +120,7 @@ class AppTheme {
         fontFamily: AppFonts.robotoSemiBold,
         color: Colors.black,
       ),
-      
+
     ),
   );
   }
