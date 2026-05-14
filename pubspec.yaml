@@ -88,6 +88,12 @@ flutter:
     - family: RobotoRegular
       fonts:
         - asset: assets/fonts/Roboto-Regular.ttf
+    - family: RobotoLight
+      fonts:
+        - asset: assets/fonts/Roboto-Light.ttf
+    - family: RobotoThin
+      fonts:
+        - asset: assets/fonts/Roboto-Thin.ttf
     - family: RobotoMedium
       fonts:
         - asset: assets/fonts/Roboto-Medium.ttf

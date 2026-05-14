@@ -1,3 +1,4 @@
+import 'package:e_waris/core/contants/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,13 +16,13 @@ class CustomListTile extends StatelessWidget {
         width: 50,
         height: 50,
         decoration: BoxDecoration(
-          color: const Color(0xFFFFEAEA),
+          color: AppColors.lightRed,
           shape: BoxShape.circle,
         ),
         child: const Center(
           child: Icon(
             Icons.warning_amber_rounded,
-            color: Colors.red,
+            color: AppColors.red,
             size: 28,
           ),
         ),
@@ -44,7 +45,7 @@ class CustomListTile extends StatelessWidget {
         "Just now",
         style: TextStyle(
           fontSize: 12,
-          color: Colors.grey,
+          color: AppColors.grey,
         ),
       ),
     );

@@ -1,4 +1,5 @@
 
+import 'package:e_waris/core/contants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class Button2 extends StatelessWidget {
@@ -17,14 +18,14 @@ class Button2 extends StatelessWidget {
       child: ElevatedButton(onPressed: () {
 
       },style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFFFAE7EE), // light pink fill
-        foregroundColor: Colors.pink,
+        backgroundColor: AppColors.lightPink, // light pink fill
+        foregroundColor: AppColors.pink,
         elevation: 0,
         textStyle: Theme.of(context).textTheme.labelLarge,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
           side: const BorderSide(
-            color: Color(0xFFF8A3C5),
+            color: AppColors.darkPink,
             width: 1,
           ),
         ),

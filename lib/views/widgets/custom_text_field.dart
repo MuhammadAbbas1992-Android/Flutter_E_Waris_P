@@ -14,7 +14,7 @@ class CustomTextField extends StatelessWidget {
     required this.hintText,
     required this.controller,
     this.borderRadius = 8,
-    this.borderColor = AppColors.kCTextFieldBorder,
+    this.borderColor = AppColors.textFieldBorder,
     this.borderWidth = 1,
   });
 

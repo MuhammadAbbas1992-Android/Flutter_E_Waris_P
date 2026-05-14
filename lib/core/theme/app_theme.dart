@@ -6,34 +6,31 @@ class AppTheme {
 
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
-    primaryColor: AppColors.kCPrimary,
+    primaryColor: AppColors.primary,
     // Scaffold Background
-    scaffoldBackgroundColor: AppColors.kCWhite,
+    scaffoldBackgroundColor: AppColors.white,
 // Primary Color Scheme
     colorScheme: ColorScheme.fromSeed(
-      seedColor: AppColors.kCPrimary,
+      seedColor: AppColors.primary,
       brightness: Brightness.light,
     ),
 // AppBar Theme
-    appBarTheme: const AppBarTheme(
-      backgroundColor: AppColors.kCPrimary,
-      foregroundColor: AppColors.kCWhite,
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColors.primary,
+      foregroundColor: AppColors.white,
       centerTitle: true,
       elevation: 0,
     ),
 // Elevated Button Theme
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.kCPrimary,
-        foregroundColor: AppColors.kCWhite,
+        backgroundColor: AppColors.primary,
+        foregroundColor: AppColors.white,
         //minimumSize: const Size(double.infinity, 40),
         // Remove fixed width
         minimumSize: Size.zero,
-        padding: const EdgeInsets.symmetric(
-          horizontal: 20,
-        ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(8),
         ),
       ),
     ),
@@ -41,86 +38,23 @@ class AppTheme {
     inputDecorationTheme: InputDecorationTheme(
       focusedBorder: OutlineInputBorder(
         borderSide: const BorderSide(
-          color:  AppColors.kCWhite,
+          color:  AppColors.white,
           width: 2,
         ),
         borderRadius: BorderRadius.circular(12),
       ),
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(
-          color: AppColors.kCGrey,
+          color: AppColors.grey,
         ),
         borderRadius: BorderRadius.circular(12),
       ),
     ),
     // Floating Action Button Theme
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor:  AppColors.kCWhite,
-      foregroundColor: Colors.white,
+      backgroundColor:  AppColors.white,
+      foregroundColor: AppColors.white,
     ),
 
-    textTheme: const TextTheme(
-
-      // Large Heading
-      headlineLarge: TextStyle(
-        fontSize: 30,
-        fontFamily: AppFonts.robotoExtraBold,
-        color: Colors.black,
-      ),
-
-      // Medium Heading
-      headlineMedium: TextStyle(
-        fontSize: 24,
-        fontFamily: AppFonts.robotoBold,
-        color: Colors.black,
-      ),
-
-      // Small Heading
-      headlineSmall: TextStyle(
-        fontSize: 18,
-        fontFamily: AppFonts.robotoBold,
-        color: Colors.black,
-      ),
-
-      // Title
-      titleLarge: TextStyle(
-        fontSize: 18,
-        fontFamily: AppFonts.robotoSemiBold,
-        color: Colors.black,
-      ),
-
-      titleMedium: TextStyle(
-        fontSize: 16,
-        fontFamily: AppFonts.robotoSemiBold,
-        color: Colors.black87,
-      ),
-
-      titleSmall: TextStyle(
-        fontSize: 14,
-        fontFamily: AppFonts.robotoSemiBold,
-        color: Colors.black87,
-      ),
-
-      // Body Text
-      bodyLarge: TextStyle(
-        fontSize: 15,
-        fontFamily: AppFonts.robotoSemiBold,
-        color: Colors.black,
-      ),
-
-      bodyMedium: TextStyle(
-        fontSize: 15,
-        fontFamily: AppFonts.robotoRegular,
-        color: Colors.black87,
-      ),
-
-      // Button Text
-      labelLarge: TextStyle(
-        fontSize: 14,
-        fontFamily: AppFonts.robotoSemiBold,
-        color: Colors.black,
-      ),
-
-    ),
   );
   }
