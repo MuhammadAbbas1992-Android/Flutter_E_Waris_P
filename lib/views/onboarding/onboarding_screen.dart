@@ -1,6 +1,5 @@
 import 'package:e_waris/core/contants/app_colors.dart';
-import 'package:e_waris/views/widgets/button1.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:e_waris/views/widgets/custom_button1.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -103,19 +102,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ),
 
                       /// Next Button
-                      Button1(
+                      CustomButton1(
                         btnText: provider.currentIndex == 2
                             ? "Get Started"
                             : "Next",
                         btnWidth: provider.currentIndex == 2 ? .4 : .2,
-                        onPress: () {
+                        onPressed: () {
                           if (provider.currentIndex == 2) {
                             /// Navigate
                             /// Login Screen
                           } else {
                             provider.nextPage();
                           }
-                        }       ),
+                        }, isLoading: false,       ),
 
                     ],
                   ),
