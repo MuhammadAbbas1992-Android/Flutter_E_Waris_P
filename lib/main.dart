@@ -1,5 +1,6 @@
 import 'package:e_waris/providers/auth_providers.dart';
 import 'package:e_waris/providers/onboarding_provider.dart';
+import 'package:e_waris/routes/app_routs.dart';
 import 'package:e_waris/views/auth/login_screen.dart';
 import 'package:e_waris/views/onboarding/onboarding_screen.dart';
 import 'package:e_waris/views/splash/splash_screen.dart';
@@ -30,6 +31,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
         home: const SplashScreen(),
+        // home: const HomeView(),
+        initialRoute: AppRouts.initial,
+        routes: AppRouts.appRouts,
       ),
     );
   }

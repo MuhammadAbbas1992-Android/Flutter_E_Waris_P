@@ -7,6 +7,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../core/contants/app_fonts.dart';
 import '../../data/sources/onboarding_data.dart';
 import '../../providers/onboarding_provider.dart';
+import '../auth/login_screen.dart';
 import '../widgets/custom_text.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -84,7 +85,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     children: [
                       /// Skip
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginScreen(),
+                          ),
+                        );},
                         child: CustomText(text: 'Skip'),
                       ),
 
@@ -109,8 +115,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         btnWidth: provider.currentIndex == 2 ? .4 : .2,
                         onPressed: () {
                           if (provider.currentIndex == 2) {
-                            /// Navigate
-                            /// Login Screen
+                            Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                          builder: (context) => const LoginScreen(),
+                          ),
+                          );
                           } else {
                             provider.nextPage();
                           }

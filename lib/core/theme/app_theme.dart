@@ -21,19 +21,7 @@ class AppTheme {
       centerTitle: true,
       elevation: 0,
     ),
-// Elevated Button Theme
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.primary,
-        foregroundColor: AppColors.white,
-        //minimumSize: const Size(double.infinity, 40),
-        // Remove fixed width
-        minimumSize: Size.zero,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-      ),
-    ),
+
     // Input Decoration Theme
     inputDecorationTheme: InputDecorationTheme(
       focusedBorder: OutlineInputBorder(

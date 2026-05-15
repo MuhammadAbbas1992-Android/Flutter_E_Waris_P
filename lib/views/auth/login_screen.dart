@@ -7,6 +7,7 @@ import 'package:e_waris/views/widgets/custom_text.dart';
 import 'package:e_waris/views/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/gestures.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -25,7 +26,7 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 180),
+                const SizedBox(height: 150),
                 Align(
                   alignment: Alignment.center,
                   child: const CustomText(
@@ -35,7 +36,7 @@ class LoginScreen extends StatelessWidget {
                     fontColor: AppColors.primary,
                   ),
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 50),
 
                 // Email Field
                 const CustomText(
@@ -65,7 +66,7 @@ class LoginScreen extends StatelessWidget {
                       authProvider.isPasswordVisible
                           ? Icons.visibility
                           : Icons.visibility_off_outlined,
-                      color: Colors.grey,
+                      color: AppColors.primary,
                     ),
                     onPressed: () => authProvider.togglePasswordVisibility(),
                   ),
@@ -75,13 +76,22 @@ class LoginScreen extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {},
-                    child: CustomText(text: 'Forgot Password?',fontFamily: AppFonts.robotoMedium, fontColor: AppColors.primary,),
+                    child: CustomText(
+                      text: 'Forgot Password?',
+                      fontFamily: AppFonts.robotoMedium,
+                      fontColor: AppColors.primary,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 16),
 
                 // Login Button
-                CustomButton1(isLoading: authProvider.isLoading, btnText: 'Login',  onPressed: () => authProvider.login("test@gmail.con", "123456"),),
+                CustomButton1(
+                  isLoading: authProvider.isLoading,
+                  btnText: 'Login',
+                  onPressed: () =>
+                      authProvider.login("test@gmail.con", "123456"),
+                ),
                 const SizedBox(height: 24),
                 const Row(
                   children: [
@@ -95,26 +105,36 @@ class LoginScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
 
-                // Signup Button
-                SizedBox(
-                  width: double.infinity,
-                  height: 55,
-                  child: OutlinedButton(
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SignupScreen(),
+                // Signup Link
+                Align(
+                  alignment: Alignment.center,
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Don\'t have an account?',
+                      style: TextStyle(
+                        color: AppColors.black,
+                        fontFamily: AppFonts.robotoSemiBold,
+                        fontSize: 18,
                       ),
-                    ),
-                    style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: Color(0xFFE0E0E0)),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: const Text(
-                      "Create New Account",
-                      style: TextStyle(color: Color(0xFF1E61D8), fontSize: 15),
+                      children: [
+                        TextSpan(
+                          text: '  Sign Up',
+                          style: TextStyle(
+                            color: AppColors.primary,
+                            fontFamily: AppFonts.robotoSemiBold,
+                          ),
+
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const SignupScreen(),
+                                ),
+                              );
+                            },
+                        ),
+                      ],
                     ),
                   ),
                 ),
