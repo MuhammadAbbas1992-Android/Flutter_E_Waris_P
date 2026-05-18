@@ -1,9 +1,12 @@
-import 'package:e_waris/providers/auth_providers.dart';
+import 'package:e_waris/providers/asset_provider.dart';
+import 'package:e_waris/providers/auth_provider.dart';
+import 'package:e_waris/providers/dashboard_provider.dart';
+import 'package:e_waris/providers/emergency_provider.dart';
+import 'package:e_waris/providers/nominee_provider.dart';
+import 'package:e_waris/providers/notifications_provider.dart';
 import 'package:e_waris/providers/onboarding_provider.dart';
 import 'package:e_waris/routes/app_routs.dart';
-import 'package:e_waris/views/auth/login_screen.dart';
-import 'package:e_waris/views/onboarding/onboarding_screen.dart';
-import 'package:e_waris/views/splash/splash_screen.dart';
+import 'package:e_waris/views/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,8 +27,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AuthProviders()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => OnboardingProvider()),
+        ChangeNotifierProvider(create: (_) => DashboardProvider()),
+        ChangeNotifierProvider(create: (_) => AssetProvider()),
+        ChangeNotifierProvider(create: (_) => NomineeProvider()),
+        ChangeNotifierProvider(create: (_) => NotificationsProvider()),
+        ChangeNotifierProvider(create: (_) => EmergencyProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../core/contants/app_fonts.dart';
-import '../../data/sources/onboarding_data.dart';
-import '../../providers/onboarding_provider.dart';
-import '../auth/login_screen.dart';
-import '../widgets/custom_text.dart';
+import '../core/contants/app_fonts.dart';
+import '../data/sources/onboarding_data.dart';
+import '../providers/onboarding_provider.dart';
+import 'auth/login_screen.dart';
+import 'widgets/custom_text.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});

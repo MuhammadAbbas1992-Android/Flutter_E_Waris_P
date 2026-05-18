@@ -10,7 +10,7 @@ class CustomText extends StatelessWidget {
   final String? fontFamily;
   final TextAlign textAlign;
 
-  const CustomText({
+  const CustomText( {
     super.key,
     required this.text,
     this.fontSize = 15,

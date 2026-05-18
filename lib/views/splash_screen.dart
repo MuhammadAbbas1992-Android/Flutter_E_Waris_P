@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'package:e_waris/core/contants/app_colors.dart';
 import 'package:e_waris/core/contants/app_fonts.dart';
+import 'package:e_waris/routes/app_routs.dart';
+import 'package:e_waris/routes/routs_name.dart';
 import 'package:e_waris/views/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../onboarding/onboarding_screen.dart';
+import 'onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -19,12 +21,13 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
+      Navigator.pushReplacementNamed(context, RoutsName.onboardingScreen);
+      /*Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (_) => const OnboardingScreen(),
         ),
-      );
+      );*/
     });
   }
 
