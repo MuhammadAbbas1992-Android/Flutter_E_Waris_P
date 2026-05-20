@@ -1,8 +1,7 @@
-import 'package:e_waris/core/contants/app_fonts.dart';
 import 'package:e_waris/views/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
-
-import '../../core/contants/app_colors.dart';
+import '../../core/constants/app_colors.dart';
+import '../../core/constants/app_fonts.dart';
 
 class CustomButton1 extends StatelessWidget {
   final bool isLoading;

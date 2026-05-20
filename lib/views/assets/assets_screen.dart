@@ -1,27 +1,16 @@
+import 'package:e_waris/data/sources/asset_data.dart';
 import 'package:e_waris/views/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
-import '../../core/contants/app_colors.dart';
-import '../../core/contants/app_fonts.dart';
+
+import '../../core/constants/app_colors.dart';
+import '../../core/constants/app_fonts.dart';
+import '../widgets/custom_card.dart';
 
 class AssetsScreen extends StatelessWidget {
   const AssetsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final assets = [
-      {
-        "title": "Bank Account",
-        "subtitle": "HBL Savings Account",
-      },
-      {
-        "title": "Property",
-        "subtitle": "Islamabad House",
-      },
-      {
-        "title": "Vehicle",
-        "subtitle": "Toyota Corolla",
-      },
-    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -43,32 +32,14 @@ class AssetsScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: ListView.builder(
-          itemCount: assets.length,
+          itemCount: assetsList.length,
           itemBuilder: (context, index) {
-            return Card(
-              margin: const EdgeInsets.only(bottom: 14),
-
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(14),
-              ),
-
-              child: ListTile(
-                leading: const CircleAvatar(
-                  child: Icon(Icons.inventory),
-                ),
-
-                title: CustomText(text: assets[index]["title"]!,),
-
-                subtitle: CustomText(
-                   text: assets[index]["subtitle"]!,
-                ),
-
-                trailing: const Icon(Icons.arrow_forward_ios, size: 18),
-              ),
-            );
+            return CustomCard(assets: assetsList[index]);
           },
         ),
       ),
     );
   }
 }
+
+

@@ -1,10 +1,9 @@
-import 'package:e_waris/core/contants/app_colors.dart';
 import 'package:e_waris/views/widgets/custom_button1.dart';
+import 'package:e_waris/views/widgets/custom_onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-import '../core/contants/app_fonts.dart';
+import '../core/constants/app_colors.dart';
 import '../data/sources/onboarding_data.dart';
 import '../providers/onboarding_provider.dart';
 import 'auth/login_screen.dart';
@@ -38,36 +37,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     itemBuilder: (context, index) {
                       final item = onboardingList[index];
 
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-
-                        child: Column(
-                          children: [
-                            const SizedBox(height: 200),
-
-                            /// Image
-                            Image.asset(item.image, height: 250),
-
-                            const SizedBox(height: 30),
-
-                            /// Title
-                            CustomText(
-                              text: item.title,
-                              fontFamily: AppFonts.robotoExtraBold,
-                              textAlign: TextAlign.center,
-                              fontSize: 38,
-                            ),
-
-                            const SizedBox(height: 20),
-
-                            /// Description
-                            CustomText(
-                              text: item.description,
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                      );
+                      return CustomOnboarding(item: item);
                     },
                   ),
                 ),
@@ -112,15 +82,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         btnText: provider.currentIndex == 2
                             ? "Get Started"
                             : "Next",
-                        btnWidth: provider.currentIndex == 2 ? .4 : .2,
+                        btnWidth: provider.currentIndex == 2 ? .4 : .3,
                         onPressed: () {
                           if (provider.currentIndex == 2) {
                             Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                          builder: (context) => const LoginScreen(),
-                          ),
-                          );
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const LoginScreen(),
+                              ),
+                            );
                           } else {
                             provider.nextPage();
                           }
@@ -137,3 +107,5 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 }
+
+

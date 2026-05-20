@@ -1,5 +1,3 @@
-import 'package:e_waris/core/contants/app_colors.dart';
-import 'package:e_waris/core/contants/app_fonts.dart';
 import 'package:e_waris/providers/auth_provider.dart';
 import 'package:e_waris/views/dashboard_screen.dart';
 import 'package:e_waris/views/widgets/custom_button1.dart';
@@ -8,6 +6,9 @@ import 'package:e_waris/views/widgets/custom_text_field.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../core/constants/app_colors.dart';
+import '../../core/constants/app_fonts.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});

@@ -1,13 +1,9 @@
 import 'dart:async';
-import 'package:e_waris/core/contants/app_colors.dart';
-import 'package:e_waris/core/contants/app_fonts.dart';
-import 'package:e_waris/routes/app_routs.dart';
 import 'package:e_waris/routes/routs_name.dart';
 import 'package:e_waris/views/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
-import 'onboarding_screen.dart';
+import '../core/constants/app_colors.dart';
+import '../core/constants/app_fonts.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -22,12 +18,6 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacementNamed(context, RoutsName.onboardingScreen);
-      /*Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (_) => const OnboardingScreen(),
-        ),
-      );*/
     });
   }
 
@@ -35,21 +25,21 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 80.0, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 4.0),
         child: Center(
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset('assets/images/splash.jpeg'),
-                const SizedBox(height: 20),
+                Image.asset('assets/images/splash.jpeg',width: 250),
+                const SizedBox(height: 50),
                 CustomText(
-                  text: 'Digital Estate Manager',
-                  fontFamily: AppFonts.robotoExtraBold,
+                  text: 'Digital Estate \nManager',
+                  fontFamily: AppFonts.robotoBold,
                   textAlign: TextAlign.center,
-                   fontSize: 38,
-                   fontColor: AppColors.primary,
+                  fontSize: 30,
+                  fontColor: AppColors.primary,
                 ),
                 const SizedBox(height: 20),
                 CustomText(

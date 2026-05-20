@@ -53,7 +53,7 @@ class _AddAssetScreenState extends State<AddAssetScreen> {
                   platformName: platformCtrl.text,
                   category: categoryCtrl.text,
                   email: emailCtrl.text,
-                  notes: notesCtrl.text,
+                  notes: notesCtrl.text, addedOn: '',
                 );
 
                 provider.addAsset(asset);

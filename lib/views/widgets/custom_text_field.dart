@@ -1,7 +1,6 @@
-import 'package:e_waris/core/contants/app_colors.dart';
 import 'package:e_waris/core/utils/app_utils.dart';
-import 'package:e_waris/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
+import '../../core/constants/app_colors.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hintText;

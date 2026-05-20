@@ -1,7 +1,4 @@
-
-
 import '../models/onboarding_model.dart';
-
 List<OnboardingModel> onboardingList = [
 
   OnboardingModel(

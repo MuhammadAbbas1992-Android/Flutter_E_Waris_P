@@ -1,9 +1,7 @@
 import 'dart:ui';
-
-import 'package:e_waris/core/contants/app_colors.dart';
 import 'package:flutter/material.dart';
-
-import '../contants/app_fonts.dart';
+import '../constants/app_colors.dart';
+import '../constants/app_fonts.dart';
 
 class AppUtils{
   static const dbName='EWaris';

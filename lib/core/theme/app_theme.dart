@@ -1,6 +1,5 @@
-import 'package:e_waris/core/contants/app_colors.dart';
-import 'package:e_waris/core/contants/app_fonts.dart';
 import 'package:flutter/material.dart';
+import '../constants/app_colors.dart';
 
 class AppTheme {
 

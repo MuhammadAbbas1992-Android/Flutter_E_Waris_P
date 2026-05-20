@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import '../../core/contants/app_colors.dart';
-import '../../core/contants/app_fonts.dart';
+import '../../core/constants/app_colors.dart';
+import '../../core/constants/app_fonts.dart';
 
 class CustomText extends StatelessWidget {
   final String text;

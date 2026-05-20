@@ -1,8 +1,8 @@
 import 'package:e_waris/views/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/contants/app_colors.dart';
-import '../../core/contants/app_fonts.dart';
+import '../../core/constants/app_colors.dart';
+import '../../core/constants/app_fonts.dart';
 
 class NomineeScreen extends StatelessWidget {
   const NomineeScreen({super.key});

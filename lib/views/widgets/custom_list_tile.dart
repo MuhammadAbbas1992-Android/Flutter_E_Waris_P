@@ -1,6 +1,5 @@
-import 'package:e_waris/core/contants/app_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../core/constants/app_colors.dart';
 
 class CustomListTile extends StatelessWidget {
   const CustomListTile({super.key});

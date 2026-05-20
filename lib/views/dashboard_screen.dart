@@ -1,12 +1,12 @@
-import 'package:e_waris/core/contants/app_colors.dart';
+
 import 'package:e_waris/providers/dashboard_provider.dart';
 import 'package:e_waris/views/assets/assets_screen.dart';
 import 'package:e_waris/views/nominees/nominee_screen.dart';
 import 'package:e_waris/views/settings/setting_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../core/constants/app_colors.dart';
 import 'notifications_screen.dart';
 
 
