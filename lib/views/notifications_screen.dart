@@ -1,4 +1,4 @@
-import 'package:e_waris/providers/notifications_provider.dart';
+import 'package:e_waris/view_models/notifications_provider.dart';
 import 'package:e_waris/views/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

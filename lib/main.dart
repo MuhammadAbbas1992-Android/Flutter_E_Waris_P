@@ -1,10 +1,10 @@
-import 'package:e_waris/providers/asset_provider.dart';
-import 'package:e_waris/providers/auth_provider.dart';
-import 'package:e_waris/providers/dashboard_provider.dart';
-import 'package:e_waris/providers/emergency_provider.dart';
-import 'package:e_waris/providers/nominee_provider.dart';
-import 'package:e_waris/providers/notifications_provider.dart';
-import 'package:e_waris/providers/onboarding_provider.dart';
+import 'package:e_waris/view_models/asset_provider.dart';
+import 'package:e_waris/view_models/auth/auth_provider.dart';
+import 'package:e_waris/view_models/dashboard_provider.dart';
+import 'package:e_waris/view_models/emergency_provider.dart';
+import 'package:e_waris/view_models/nominee_provider.dart';
+import 'package:e_waris/view_models/notifications_provider.dart';
+import 'package:e_waris/view_models/onboarding_provider.dart';
 import 'package:e_waris/routes/app_routs.dart';
 import 'package:e_waris/views/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';

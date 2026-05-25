@@ -1,6 +1,7 @@
-import 'package:e_waris/providers/emergency_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../view_models/emergency_provider.dart';
 
 class AliveCheckPopup extends StatelessWidget {
   const AliveCheckPopup({super.key});

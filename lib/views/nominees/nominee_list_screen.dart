@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../data/models/nominee_model.dart';
-import '../../providers/asset_provider.dart';
+import '../../view_models/asset_provider.dart';
 
 class NomineeListScreen extends StatelessWidget {
   const NomineeListScreen({super.key});

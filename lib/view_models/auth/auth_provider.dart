@@ -1,15 +1,20 @@
+import 'package:e_waris/routes/routs_name.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../core/utils/app_utils.dart';
 
 class AuthProvider extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   bool _isLoading = false;
+
   bool get isLoading => _isLoading;
 
   // Toggle password visibility
   bool _isPasswordVisible = false;
+
   bool get isPasswordVisible => _isPasswordVisible;
 
   void togglePasswordVisibility() {
@@ -22,33 +27,29 @@ class AuthProvider extends ChangeNotifier {
       _isLoading = true;
       notifyListeners();
 
-      await _auth.signInWithEmailAndPassword(
+      UserCredential response = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      if (response.user != null) {
+        AppUtils.mySnackBar(title: 'Response', message: 'Login successfully');
+      }
 
-      final prefs = await SharedPreferences.getInstance();
-      prefs.setBool('isLogin', true);
-
-      _isLoading = false;
-      notifyListeners();
-
-      return true;
+      return response.user != null;
     } catch (e) {
+      return false;
+    } finally {
       _isLoading = false;
       notifyListeners();
-      return false;
     }
   }
+
   Future<bool> signUp(String email, String password) async {
     try {
       _isLoading = true;
       notifyListeners();
 
-      await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
 
       final prefs = await SharedPreferences.getInstance();
       prefs.setBool('isLogin', true);
@@ -63,5 +64,4 @@ class AuthProvider extends ChangeNotifier {
       return false;
     }
   }
-
 }

@@ -1,6 +1,7 @@
-import 'package:e_waris/providers/emergency_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../view_models/emergency_provider.dart';
 
 class InactivitySettingScreen extends StatelessWidget {
   const InactivitySettingScreen({super.key});

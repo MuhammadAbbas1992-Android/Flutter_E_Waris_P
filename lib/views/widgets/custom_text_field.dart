@@ -1,4 +1,5 @@
 import 'package:e_waris/core/utils/app_utils.dart';
+import 'package:e_waris/view_models/auth/auth_provider.dart';
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
 
@@ -9,6 +10,8 @@ class CustomTextField extends StatelessWidget {
   final Color borderColor;
   final double borderWidth;
   final Widget? suffixIcon;
+  final bool obscureText;
+  final FormFieldValidator validator;
 
   const CustomTextField({
     super.key,
@@ -17,6 +20,7 @@ class CustomTextField extends StatelessWidget {
     this.borderRadius = 8,
     this.borderColor = AppColors.textFieldBorder,
     this.borderWidth = 1,  this.suffixIcon,
+    this.obscureText = false, required this.validator,
   });
 
   @override
@@ -24,7 +28,8 @@ class CustomTextField extends StatelessWidget {
     return TextField(
       controller: controller,
       style: Theme.of(context).textTheme.bodyMedium,
-
+      obscuringCharacter: '*',
+      obscureText: obscureText,
       decoration: InputDecoration(
         hintText: hintText,
         // Hint Style

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/asset_provider.dart';
+import '../../view_models/asset_provider.dart';
 
 class AssetDetailScreen extends StatelessWidget {
   const AssetDetailScreen({super.key});

@@ -1,3 +1,4 @@
+import 'package:e_waris/routes/routs_name.dart';
 import 'package:e_waris/views/widgets/custom_button1.dart';
 import 'package:e_waris/views/widgets/custom_onboarding.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../core/constants/app_colors.dart';
 import '../data/sources/onboarding_data.dart';
-import '../providers/onboarding_provider.dart';
+import '../view_models/onboarding_provider.dart';
 import 'auth/login_screen.dart';
 import 'widgets/custom_text.dart';
 
