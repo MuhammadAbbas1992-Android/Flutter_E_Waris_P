@@ -19,7 +19,7 @@ class AppRouts {
     RoutsName.signupScreen : (context) => SignupScreen(),
     RoutsName.dashboardScreen : (context) => DashboardScreen(),
     RoutsName.assetsScreen : (context) => AssetsScreen(),
-    RoutsName.nomineeScreen : (context) => NomineeScreen(),
+    RoutsName.nomineeScreen : (context) => NomineesScreen(),
     RoutsName.notificationsScreen : (context) => NotificationsScreen(),
     RoutsName.settingScreen : (context) => SettingScreen(),  };
 

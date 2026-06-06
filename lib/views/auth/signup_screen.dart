@@ -1,15 +1,17 @@
+import 'package:e_waris/core/utils/app_utils.dart';
 import 'package:e_waris/view_models/auth/auth_provider.dart';
-import 'package:e_waris/views/dashboard_screen.dart';
 import 'package:e_waris/views/widgets/custom_button1.dart';
 import 'package:e_waris/views/widgets/custom_text.dart';
-import 'package:e_waris/views/widgets/custom_text_field.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_fonts.dart';
 import '../../routes/routs_name.dart';
+import '../widgets/custom_divider.dart';
+import '../widgets/custom_rich_text.dart';
+import '../widgets/custom_text_form_field.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
@@ -39,30 +41,29 @@ class SignupScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 50),
-
               // Email Field
               const CustomText(
                 text: 'Email',
                 fontFamily: AppFonts.robotoMedium,
               ),
               const SizedBox(height: 8),
-              CustomTextField(
+              CustomTextFormField(
                 hintText: 'your@email.com',
-                controller: emailController, validator: (value) {  },
+                controller: emailController,
+                validator: (value) => AppUtils.validateEmail(value),
               ),
-
-              const SizedBox(height: 20),
-
               // Password Field
               const CustomText(
                 text: 'Password',
                 fontFamily: AppFonts.robotoMedium,
               ),
               const SizedBox(height: 8),
-              CustomTextField(
+              CustomTextFormField(
+
                 hintText: '********',
                 controller: passwordController,
                 obscureText: !authProvider.isPasswordVisible,
+                keyboardType: TextInputType.visiblePassword,
                 suffixIcon: IconButton(
                   icon: Icon(
                     authProvider.isPasswordVisible
@@ -71,19 +72,22 @@ class SignupScreen extends StatelessWidget {
                     color: AppColors.primary,
                   ),
                   onPressed: () => authProvider.togglePasswordVisibility(),
-                ), validator: (value) {  },
+                ),
+                validator: (value) => AppUtils.validatePassword(value),
+                onTap: () => authProvider.togglePasswordVisibility(),
               ),
-
               // Confirm Password Field
               const CustomText(
                 text: 'Confirm Password',
                 fontFamily: AppFonts.robotoMedium,
               ),
               const SizedBox(height: 8),
-              CustomTextField(
+              CustomTextFormField(
+
                 hintText: '********',
                 controller: confirmPasswordController,
                 obscureText: !authProvider.isPasswordVisible,
+                keyboardType: TextInputType.visiblePassword,
                 suffixIcon: IconButton(
                   icon: Icon(
                     authProvider.isPasswordVisible
@@ -92,7 +96,9 @@ class SignupScreen extends StatelessWidget {
                     color: AppColors.primary,
                   ),
                   onPressed: () => authProvider.togglePasswordVisibility(),
-                ), validator: (value) {  },
+                ),
+                validator: (value) => AppUtils.validateConfirmPassword(value,passwordController.text.trim()),
+                onTap: () => authProvider.togglePasswordVisibility(),
               ),
               const SizedBox(height: 16),
 
@@ -101,70 +107,29 @@ class SignupScreen extends StatelessWidget {
                 isLoading: authProvider.isLoading,
                 btnText: 'Sign Up',
                 onPressed: () async {
-                  bool success = await authProvider.login(
+                  bool success = await authProvider.signUp(
                     emailController.text.trim(),
                     passwordController.text.trim(),
                   );
+                  if (!context.mounted) return; // 🔥 FIX
                   if (success) {
-                    Navigator.pushNamed(context, RoutsName.loginScreen);
+                    Fluttertoast.showToast(msg: 'Signup successful');
+                    // Navigator.pushNamed(context, RoutsName.dashboardScreen);
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Invalid email or password'),
-                      ),
-                    );
-                  }
+                    Fluttertoast.showToast(msg: 'Failed to signup'); }
                 },
               ),
-
               const SizedBox(height: 24),
-              const Row(
-                children: [
-                  Expanded(child: Divider()),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
-                      "or",
-                      style: TextStyle(color: AppColors.darkGrey),
-                    ),
-                  ),
-                  Expanded(child: Divider()),
-                ],
-              ),
+              CustomDivider(color: AppColors.darkGrey,),
               const SizedBox(height: 24),
 
-              // Signup Link
-              Align(
-                alignment: Alignment.center,
-                child: RichText(
-                  text: TextSpan(
-                    text: 'Already have an account?',
-                    style: TextStyle(
-                      color: AppColors.black,
-                      fontFamily: AppFonts.robotoSemiBold,
-                      fontSize: 18,
-                    ),
-                    children: [
-                      TextSpan(
-                        text: '  Login',
-                        style: TextStyle(
-                          color: AppColors.primary,
-                          fontFamily: AppFonts.robotoSemiBold,
-                        ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const DashboardScreen(),
-                              ),
-                            );
-                          },
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              // Login Link
+              CustomRichText(leftTextSpan: 'Already have an account?',
+                rightTextSpan: '  Login',
+                leftTextSpanColor: AppColors.black,
+                rightTextSpanColor: AppColors.primary,
+                onTap: () {
+                  Navigator.pushNamed(context, RoutsName.loginScreen);},),
             ],
           ),
         ),

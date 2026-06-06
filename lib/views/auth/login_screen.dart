@@ -1,15 +1,16 @@
 import 'package:e_waris/routes/routs_name.dart';
 import 'package:e_waris/view_models/auth/auth_provider.dart';
-import 'package:e_waris/views/auth/signup_screen.dart';
 import 'package:e_waris/views/widgets/custom_button1.dart';
 import 'package:e_waris/views/widgets/custom_text.dart';
-import 'package:e_waris/views/widgets/custom_text_field.dart';
+import 'package:e_waris/views/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/gestures.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_fonts.dart';
 import '../../core/utils/app_utils.dart';
+import '../widgets/custom_divider.dart';
+import '../widgets/custom_rich_text.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -19,14 +20,14 @@ class LoginScreen extends StatelessWidget {
     final authProvider = Provider.of<AuthProvider>(context);
     final emailController = TextEditingController(text: 'abc123@gmail.com');
     final passwordController = TextEditingController(text: '123456');
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
 
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
         child: SingleChildScrollView(
           child: Form(
-            key: _formKey,
+            key: formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -48,12 +49,11 @@ class LoginScreen extends StatelessWidget {
                   fontFamily: AppFonts.robotoMedium,
                 ),
                 const SizedBox(height: 8),
-                CustomTextField(
+                CustomTextFormField(
                   hintText: 'your@email.com',
                   controller: emailController,
                   validator: (value) => AppUtils.validateEmail(value),
                 ),
-
                 const SizedBox(height: 20),
 
                 // Password Field
@@ -63,11 +63,11 @@ class LoginScreen extends StatelessWidget {
                 ),
 
                 const SizedBox(height: 8),
-                CustomTextField(
+                CustomTextFormField(
                   hintText: '********',
                   controller: passwordController,
-                  validator: (value) => AppUtils.validatePassword(value),
                   obscureText: !authProvider.isPasswordVisible,
+                  keyboardType: TextInputType.visiblePassword,
                   suffixIcon: IconButton(
                     icon: Icon(
                       authProvider.isPasswordVisible
@@ -77,6 +77,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     onPressed: () => authProvider.togglePasswordVisibility(),
                   ),
+                  validator: (value) => AppUtils.validatePassword(value),
                 ),
 
                 Align(
@@ -97,72 +98,32 @@ class LoginScreen extends StatelessWidget {
                   isLoading: authProvider.isLoading,
                   btnText: 'Login',
                   onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
+                    if (formKey.currentState!.validate()) {
                       bool success = await authProvider.login(
                         emailController.text.trim(),
                         passwordController.text.trim(),
                       );
-
+                      if (!context.mounted) return; // 🔥 FIX
                       if (success) {
+                        Fluttertoast.showToast(msg: 'Login successful');
                         Navigator.pushNamed(context, RoutsName.dashboardScreen);
                       } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Login failed')),
-                        );
-                      }
+                        Fluttertoast.showToast(msg: 'Login failed'); }
                     }
                   },
                 ),
 
                 const SizedBox(height: 24),
-                const Row(
-                  children: [
-                    Expanded(child: Divider()),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Text(
-                        "or",
-                        style: TextStyle(color: AppColors.darkGrey),
-                      ),
-                    ),
-                    Expanded(child: Divider()),
-                  ],
-                ),
+                CustomDivider(color: AppColors.darkGrey,),
                 const SizedBox(height: 24),
 
                 // Signup Link
-                Align(
-                  alignment: Alignment.center,
-                  child: RichText(
-                    text: TextSpan(
-                      text: 'Don\'t have an account?',
-                      style: TextStyle(
-                        color: AppColors.black,
-                        fontFamily: AppFonts.robotoSemiBold,
-                        fontSize: 18,
-                      ),
-                      children: [
-                        TextSpan(
-                          text: '  Sign Up',
-                          style: TextStyle(
-                            color: AppColors.primary,
-                            fontFamily: AppFonts.robotoSemiBold,
-                          ),
-
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const SignupScreen(),
-                                ),
-                              );
-                            },
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                CustomRichText(leftTextSpan: 'Don\'t have an account?',
+                  rightTextSpan: '  Sign Up',
+                  leftTextSpanColor: AppColors.black,
+                  rightTextSpanColor: AppColors.primary,
+                  onTap: () {
+                  Navigator.pushNamed(context, RoutsName.signupScreen);},),
               ],
             ),
           ),
@@ -171,3 +132,5 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
+
+

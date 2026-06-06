@@ -1,41 +1,19 @@
+import 'dart:ui';
+
+import 'package:flutter/cupertino.dart';
+
 class AssetModel {
-  final String? id;
-  final String platformName;
+  final String name;
   final String category;
-  final String email;
-  final String notes;
-  final String addedOn;
+  final String assignedTo;
+  final Color assignedColor;
+  final Widget icon;
 
-  AssetModel({
-    this.id,
-    required this.platformName,
+  const AssetModel({
+    required this.name,
     required this.category,
-    required this.email,
-    required this.notes,
-    required this.addedOn,
+    required this.assignedTo,
+    required this.assignedColor,
+    required this.icon,
   });
-
-  // Convert Model to JSON
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'platformName': platformName,
-      'category': category,
-      'email': email,
-      'notes': notes,
-      'addedOn': addedOn,
-    };
-  }
-
-  // Convert JSON to Model
-  factory AssetModel.fromJson(Map<String, dynamic> json) {
-    return AssetModel(
-      id: json['id'] ?? '',
-      platformName: json['platformName'] ?? '',
-      category: json['category'] ?? '',
-      email: json['email'] ?? '',
-      notes: json['notes'] ?? '',
-      addedOn: json['addedOn'] ?? '',
-    );
-  }
 }

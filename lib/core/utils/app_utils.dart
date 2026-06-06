@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_fonts.dart';
@@ -15,8 +14,8 @@ class AppUtils{
   );
   
 
-  static void mySnackBar({required String title, required String message}) {
-    SnackBar(content: Text('$title:\n$message'));
+  static void mySnackBar({required BuildContext context, required String title, required String message}) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$title:\n$message')));
   }
 
   static String? validateFieldStringData(String? value, String field) {

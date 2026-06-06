@@ -1,17 +1,18 @@
+import 'package:e_waris/views/widgets/custom_button1.dart';
 import 'package:e_waris/views/widgets/custom_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../view_models/emergency_provider.dart';
 
-class EmergencyMessageScreen extends StatefulWidget {
-  const EmergencyMessageScreen({super.key});
+class NomineeNoteScreen extends StatefulWidget {
+  const NomineeNoteScreen({super.key});
 
   @override
-  State<EmergencyMessageScreen> createState() => _EmergencyMessageScreenState();
+  State<NomineeNoteScreen> createState() => _NomineeNoteScreenState();
 }
 
-class _EmergencyMessageScreenState extends State<EmergencyMessageScreen> {
+class _NomineeNoteScreenState extends State<NomineeNoteScreen> {
   late TextEditingController _messageController;
 
   @override
@@ -52,6 +53,11 @@ class _EmergencyMessageScreenState extends State<EmergencyMessageScreen> {
                   ],
                 ),
               ),
+            ),
+            CustomButton1(
+              isLoading: false,
+              btnText: 'Login',
+              onPressed: () async {},
             ),
             Padding(
               padding: const EdgeInsets.all(20.0),
