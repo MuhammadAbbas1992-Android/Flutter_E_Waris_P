@@ -6,6 +6,12 @@ import 'package:e_waris/view_models/nominee_provider.dart';
 import 'package:e_waris/view_models/notifications_provider.dart';
 import 'package:e_waris/view_models/onboarding_provider.dart';
 import 'package:e_waris/routes/app_routs.dart';
+import 'package:e_waris/views/alive_check_popup.dart';
+import 'package:e_waris/views/auth/login_screen.dart';
+import 'package:e_waris/views/auth/signup_screen.dart';
+import 'package:e_waris/views/dashboard_screen.dart';
+import 'package:e_waris/views/nominee_note_screen.dart';
+import 'package:e_waris/views/onboarding_screen.dart';
 import 'package:e_waris/views/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -38,10 +44,14 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
-        home: const SplashScreen(),
-        // home: const HomeView(),
-        initialRoute: AppRouts.initial,
-        routes: AppRouts.appRouts,
+        // home: const SplashScreen(),
+        // home: const OnboardingScreen(),
+        home: const DashboardScreen(),
+        // home: const LoginScreen(),
+        // home: const SignupScreen(),
+        // home: const AliveCheckPopup(),
+        // initialRoute: AppRouts.initial,
+        // routes: AppRouts.appRouts,
       ),
     );
   }

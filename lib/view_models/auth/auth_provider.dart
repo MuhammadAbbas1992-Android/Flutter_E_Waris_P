@@ -31,10 +31,6 @@ class AuthProvider extends ChangeNotifier {
         email: email,
         password: password,
       );
-      if (response.user != null) {
-        AppUtils.mySnackBar(title: 'Response', message: 'Login successfully');
-      }
-
       return response.user != null;
     } catch (e) {
       return false;
@@ -49,19 +45,17 @@ class AuthProvider extends ChangeNotifier {
       _isLoading = true;
       notifyListeners();
 
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
-
-      final prefs = await SharedPreferences.getInstance();
-      prefs.setBool('isLogin', true);
-
-      _isLoading = false;
-      notifyListeners();
-
-      return true;
+      UserCredential response = await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return response.user != null;
     } catch (e) {
+      return false;
+    } finally {
       _isLoading = false;
       notifyListeners();
-      return false;
     }
   }
+
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
 
-class Button2 extends StatelessWidget {
-  const Button2({
+class CustomButton2 extends StatelessWidget {
+  const CustomButton2({
     super.key, required this.btnText,  this.btnWidth =1,
   });
 

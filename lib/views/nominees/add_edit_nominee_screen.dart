@@ -4,14 +4,14 @@ import 'package:e_waris/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class AddNomineeScreen extends StatefulWidget {
-  const AddNomineeScreen({super.key});
+class AddEditNomineeScreen extends StatefulWidget {
+  const AddEditNomineeScreen({super.key});
 
   @override
-  State<AddNomineeScreen> createState() => _AddNomineeScreenState();
+  State<AddEditNomineeScreen> createState() => _AddNomineeScreenState();
 }
 
-class _AddNomineeScreenState extends State<AddNomineeScreen> {
+class _AddNomineeScreenState extends State<AddEditNomineeScreen> {
   // ─── Controllers ───────────────────────────────────────────
   final _fullNameController = TextEditingController();
   final _emailController = TextEditingController();

@@ -11,7 +11,7 @@ class FirebaseServices{
 
     try {
       final petRef = databaseReference.child('UserKey').child(AppUtils.nominees).push();
-      nomineeModel.id = petRef.key!;
+      // nomineeModel = petRef.key;
       await petRef.set(nomineeModel.toMap());
       return true;
     } catch (e) {
