@@ -35,15 +35,27 @@ class ForgotPasswordProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      await _auth.sendPasswordResetEmail(email: emailController.text.trim());
-      print('ABC send email');
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(
+        email: _emailController.text.trim(),
+      )
+          .timeout(
+        const Duration(seconds: 15),
+      );
+
       _linkSent = true;
-      _isLoading = false;
-      notifyListeners();
       return true;
+    } on TimeoutException {
+      _linkSent = false;
+      debugPrint('Request timed out');
+      return false;
+    } on FirebaseAuthException catch (e) {
+      _linkSent = false;
+      debugPrint('Firebase Error: ${e.code}');
+      return false;
     } catch (e) {
-      _isLoading = false;
-      notifyListeners();
+      _linkSent = false;
+      debugPrint('Error: $e');
       return false;
     } finally {
       _isLoading = false;

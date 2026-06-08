@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:e_waris/routes/routs_name.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +32,12 @@ class AuthProvider extends ChangeNotifier {
       UserCredential response = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
-      );
+      ).timeout(const Duration(seconds: 10));;
       return response.user != null;
+    }on FirebaseAuthException {
+      return false;
+    } on TimeoutException {
+      return false;
     } catch (e) {
       return false;
     } finally {
@@ -48,8 +54,12 @@ class AuthProvider extends ChangeNotifier {
       UserCredential response = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
-      );
+      ).timeout(const Duration(seconds: 10));
       return response.user != null;
+    }on FirebaseAuthException {
+      return false;
+    } on TimeoutException {
+      return false;
     } catch (e) {
       return false;
     } finally {
