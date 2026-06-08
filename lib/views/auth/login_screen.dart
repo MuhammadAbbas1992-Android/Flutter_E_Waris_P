@@ -83,7 +83,7 @@ class LoginScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () => Navigator.pushNamed(context, RoutsName.forgotPasswordScreen),
                     child: CustomText(
                       text: 'Forgot Password?',
                       fontFamily: AppFonts.robotoMedium,
@@ -106,7 +106,7 @@ class LoginScreen extends StatelessWidget {
                       if (!context.mounted) return; // 🔥 FIX
                       if (success) {
                         Fluttertoast.showToast(msg: 'Login successful');
-                        Navigator.pushNamed(context, RoutsName.dashboardScreen);
+                        Navigator.pushNamed(context, RoutsName.homeScreen);
                       } else {
                         Fluttertoast.showToast(msg: 'Login failed'); }
                     }

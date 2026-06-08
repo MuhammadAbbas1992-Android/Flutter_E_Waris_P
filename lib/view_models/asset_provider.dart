@@ -2,14 +2,48 @@ import 'package:flutter/material.dart';
 
 import '../data/models/asset_model.dart';
 import '../data/models/nominee_model.dart';
+import '../views/widgets/app_icons.dart';
 
 class AssetProvider extends ChangeNotifier {
-  List<AssetModel> _assets = [];
-  List<NomineeModel> _nominees = [];
 
+  List<AssetModel> get _assets => [
+  AssetModel(
+  name: 'Binance Wallet',
+  category: 'Crypto Wallet',
+  assignedTo: 'Ali Khan',
+  assignedColor: const Color(0xFF3B5BDB),
+  icon: BinanceIcon(),
+  ),
+  AssetModel(
+  name: 'Gmail Account',
+  category: 'Email Account',
+  assignedTo: 'Brother',
+  assignedColor: const Color(0xFF3B5BDB),
+  icon: GmailIcon(),
+  ),
+  AssetModel(
+  name: 'Hostinger Domain',
+  category: 'Domain & Hosting',
+  assignedTo: 'Wife',
+  assignedColor: const Color(0xFF3B5BDB),
+  icon: HostingerIcon(),
+  ),
+  AssetModel(
+  name: 'Facebook Account',
+  category: 'Social Media',
+  assignedTo: 'Ali Khan',
+  assignedColor: const Color(0xFF3B5BDB),
+  icon: FacebookIcon(),
+  ),
+  AssetModel(
+  name: 'WhatsApp Account',
+  category: 'Messaging',
+  assignedTo: 'Brother',
+  assignedColor: const Color(0xFF3B5BDB),
+  icon: WhatsAppIcon(),
+  ),
+  ];
   List<AssetModel> get assets => _assets;
-  List<NomineeModel> get nominees => _nominees;
-
   AssetModel? _selectedAsset;
   AssetModel? get selectedAsset => _selectedAsset;
 
@@ -20,16 +54,6 @@ class AssetProvider extends ChangeNotifier {
 
   void setSelectedAsset(AssetModel asset) {
     _selectedAsset = asset;
-    notifyListeners();
-  }
-
-  void addNominee(NomineeModel nominee) {
-    _nominees.add(nominee);
-    notifyListeners();
-  }
-
-  void removeNominee(String id) {
-    _nominees.removeWhere((e) => e.id == id);
     notifyListeners();
   }
 }

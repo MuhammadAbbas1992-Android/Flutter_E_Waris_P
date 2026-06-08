@@ -44,7 +44,8 @@ dependencies:
   cloud_firestore: ^6.4.0
   flutter_svg: ^2.3.0
   curved_labeled_navigation_bar: ^2.0.6
-
+  flutter_launcher_icons: ^0.14.4
+  webview_flutter: ^4.13.1
 
 
 dev_dependencies:
@@ -73,6 +74,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/HTML/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -110,3 +112,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+# ✅ APP ICON CONFIG (IMPORTANT - OUTSIDE dependencies and flutter section)
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/app_icon.png"
+  min_sdk_android: 21
