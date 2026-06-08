@@ -13,7 +13,7 @@ class AuthProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
 
   // Toggle password visibility
-  bool _isPasswordVisible = false;
+  bool _isPasswordVisible = true;
 
   bool get isPasswordVisible => _isPasswordVisible;
 

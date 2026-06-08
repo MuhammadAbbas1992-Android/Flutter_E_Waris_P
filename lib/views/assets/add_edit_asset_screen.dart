@@ -1,20 +1,14 @@
-// add_asset_detail_screen_hamza.dart
-
 import 'package:flutter/material.dart';
-
 import '../../core/constants/app_colors.dart';
 
-
-class AddAssetScreen extends StatefulWidget {
-  const AddAssetScreen({super.key});
+class AddEditAssetScreen extends StatefulWidget {
+  const AddEditAssetScreen({super.key});
 
   @override
-  State<AddAssetScreen> createState() =>
-      _AddAssetScreenState();
+  State<AddEditAssetScreen> createState() => _AddEditAssetScreenState();
 }
 
-class _AddAssetScreenState
-    extends State<AddAssetScreen> {
+class _AddEditAssetScreenState extends State<AddEditAssetScreen> {
   final _assetNameController = TextEditingController();
   final _platformController = TextEditingController();
   final _usernameController = TextEditingController();
@@ -36,11 +30,7 @@ class _AddAssetScreenState
     'Other',
   ];
 
-  final List<String> _nominees = [
-    'John Doe',
-    'Jane Doe',
-    'Ali Hassan',
-  ];
+  final List<String> _nominees = ['John Doe', 'Jane Doe', 'Ali Hassan'];
 
   @override
   void dispose() {
@@ -133,7 +123,7 @@ class _AddAssetScreenState
             _buildTextField(
               controller: _recoveryHintController,
               hint:
-              'e.g. Password diary me hai / Recovery email brother ke paas hai',
+                  'e.g. Password diary me hai / Recovery email brother ke paas hai',
               icon: Icons.key_rounded,
               iconColor: const Color(0xFFF39C12),
               iconBg: const Color(0xFFFEF9EE),
@@ -153,7 +143,6 @@ class _AddAssetScreenState
             //const SizedBox(height: 18),
 
             // 8 & 9. Nominee + Sensitive
-
             _buildLabel('8. Assign to Nominee'),
             const SizedBox(height: 8),
             _buildNomineeDropdown(),
@@ -324,11 +313,11 @@ class _AddAssetScreenState
         ),
         children: required
             ? const [
-          TextSpan(
-            text: ' *',
-            style: TextStyle(color: Color(0xFFE74C3C)),
-          ),
-        ]
+                TextSpan(
+                  text: ' *',
+                  style: TextStyle(color: Color(0xFFE74C3C)),
+                ),
+              ]
             : [],
       ),
     );
@@ -383,13 +372,14 @@ class _AddAssetScreenState
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(14),
-            borderSide:
-            const BorderSide(color: Color(0xFF3B5BDB), width: 1.5),
+            borderSide: const BorderSide(color: Color(0xFF3B5BDB), width: 1.5),
           ),
           filled: true,
           fillColor: Colors.white,
-          contentPadding:
-          const EdgeInsets.symmetric(vertical: 14, horizontal: 4),
+          contentPadding: const EdgeInsets.symmetric(
+            vertical: 14,
+            horizontal: 4,
+          ),
         ),
       ),
     );
@@ -416,8 +406,10 @@ class _AddAssetScreenState
         child: DropdownButton<String>(
           value: _selectedCategory,
           isExpanded: true,
-          icon: const Icon(Icons.keyboard_arrow_down_rounded,
-              color: Colors.black54),
+          icon: const Icon(
+            Icons.keyboard_arrow_down_rounded,
+            color: Colors.black54,
+          ),
           items: _categories.map((cat) {
             return DropdownMenuItem<String>(
               value: cat,
@@ -429,14 +421,19 @@ class _AddAssetScreenState
                       color: const Color(0xFFEEF2FF),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: const Icon(Icons.grid_view_rounded,
-                        color: Color(0xFF3B5BDB), size: 16),
+                    child: const Icon(
+                      Icons.grid_view_rounded,
+                      color: Color(0xFF3B5BDB),
+                      size: 16,
+                    ),
                   ),
                   const SizedBox(width: 10),
                   Text(
                     cat,
                     style: const TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w500),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ],
               ),
@@ -472,7 +469,7 @@ class _AddAssetScreenState
         style: const TextStyle(fontSize: 13, color: Colors.black87),
         decoration: InputDecoration(
           hintText:
-          'Is account ke bare mein koi important information ya instructions...',
+              'Is account ke bare mein koi important information ya instructions...',
           hintStyle: const TextStyle(color: Colors.black38, fontSize: 13),
           prefixIcon: Padding(
             padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
@@ -482,12 +479,17 @@ class _AddAssetScreenState
                 color: const Color(0xFFFFF8E7),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Icon(Icons.sticky_note_2_rounded,
-                  color: Color(0xFFF39C12), size: 16),
+              child: const Icon(
+                Icons.sticky_note_2_rounded,
+                color: Color(0xFFF39C12),
+                size: 16,
+              ),
             ),
           ),
-          prefixIconConstraints:
-          const BoxConstraints(minWidth: 0, minHeight: 0),
+          prefixIconConstraints: const BoxConstraints(
+            minWidth: 0,
+            minHeight: 0,
+          ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(14),
             borderSide: BorderSide.none,
@@ -498,13 +500,11 @@ class _AddAssetScreenState
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(14),
-            borderSide:
-            const BorderSide(color: Color(0xFF3B5BDB), width: 1.5),
+            borderSide: const BorderSide(color: Color(0xFF3B5BDB), width: 1.5),
           ),
           filled: true,
           fillColor: Colors.white,
-          counterStyle:
-          const TextStyle(color: Colors.black38, fontSize: 12),
+          counterStyle: const TextStyle(color: Colors.black38, fontSize: 12),
           contentPadding: const EdgeInsets.fromLTRB(4, 14, 14, 10),
           alignLabelWithHint: true,
         ),
@@ -624,8 +624,11 @@ class _AddAssetScreenState
                   color: const Color(0xFFEEF2FF),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.people_alt_rounded,
-                    color: Color(0xFF3B5BDB), size: 15),
+                child: const Icon(
+                  Icons.people_alt_rounded,
+                  color: Color(0xFF3B5BDB),
+                  size: 15,
+                ),
               ),
               const SizedBox(width: 8),
               const Text(
@@ -634,15 +637,15 @@ class _AddAssetScreenState
               ),
             ],
           ),
-          icon: const Icon(Icons.keyboard_arrow_down_rounded,
-              color: Colors.black38, size: 20),
+          icon: const Icon(
+            Icons.keyboard_arrow_down_rounded,
+            color: Colors.black38,
+            size: 20,
+          ),
           items: _nominees.map((nominee) {
             return DropdownMenuItem<String>(
               value: nominee,
-              child: Text(
-                nominee,
-                style: const TextStyle(fontSize: 13),
-              ),
+              child: Text(nominee, style: const TextStyle(fontSize: 13)),
             );
           }).toList(),
           onChanged: (val) => setState(() => _selectedNominee = val),
@@ -676,8 +679,11 @@ class _AddAssetScreenState
               color: const Color(0xFFFFF0EE),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: const Icon(Icons.shield_rounded,
-                color: Color(0xFFE74C3C), size: 15),
+            child: const Icon(
+              Icons.shield_rounded,
+              color: Color(0xFFE74C3C),
+              size: 15,
+            ),
           ),
           const SizedBox(width: 8),
           const Expanded(
@@ -729,8 +735,11 @@ class _AddAssetScreenState
               color: const Color(0xFFEEF2FF),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: const Icon(Icons.attach_file_rounded,
-                color: Color(0xFF3B5BDB), size: 18),
+            child: const Icon(
+              Icons.attach_file_rounded,
+              color: Color(0xFF3B5BDB),
+              size: 18,
+            ),
           ),
           const SizedBox(width: 12),
           const Expanded(
@@ -771,9 +780,9 @@ class _AddAssetScreenState
               foregroundColor: const Color(0xFF3B5BDB),
               side: const BorderSide(color: Color(0xFF3B5BDB)),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              padding:
-              const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
             ),
           ),
         ],
@@ -802,7 +811,8 @@ class _AddAssetScreenState
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16)),
+            borderRadius: BorderRadius.circular(16),
+          ),
           elevation: 3,
           shadowColor: const Color(0xFF3B5BDB).withOpacity(0.4),
         ),

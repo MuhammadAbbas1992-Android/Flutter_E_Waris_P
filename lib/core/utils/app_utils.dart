@@ -12,10 +12,17 @@ class AppUtils{
     fontFamily: AppFonts.robotoRegular,
     color: AppColors.grey,
   );
-  
 
-  static void mySnackBar({required BuildContext context, required String title, required String message}) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$title:\n$message')));
+
+  static void showSnack({required BuildContext context, required String msg, bool isError = false}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(msg),
+        backgroundColor: isError ? Colors.redAccent : AppColors.primary,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      ),
+    );
   }
 
   static String? validateFieldStringData(String? value, String field) {

@@ -19,9 +19,9 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
-    final emailController = TextEditingController(text: 'abc123@gmail.com');
-    final passwordController = TextEditingController(text: '123456');
-    final confirmPasswordController = TextEditingController(text: '123456');
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
+    final confirmPasswordController = TextEditingController();
 
     return Scaffold(
       body: Padding(
@@ -74,7 +74,6 @@ class SignupScreen extends StatelessWidget {
                   onPressed: () => authProvider.togglePasswordVisibility(),
                 ),
                 validator: (value) => AppUtils.validatePassword(value),
-                onTap: () => authProvider.togglePasswordVisibility(),
               ),
               // Confirm Password Field
               const CustomText(
@@ -98,7 +97,6 @@ class SignupScreen extends StatelessWidget {
                   onPressed: () => authProvider.togglePasswordVisibility(),
                 ),
                 validator: (value) => AppUtils.validateConfirmPassword(value,passwordController.text.trim()),
-                onTap: () => authProvider.togglePasswordVisibility(),
               ),
               const SizedBox(height: 16),
 
@@ -114,7 +112,7 @@ class SignupScreen extends StatelessWidget {
                   if (!context.mounted) return; // 🔥 FIX
                   if (success) {
                     Fluttertoast.showToast(msg: 'Signup successful');
-                    // Navigator.pushNamed(context, RoutsName.dashboardScreen);
+                    Navigator.pushNamed(context, RoutsName.loginScreen);
                   } else {
                     Fluttertoast.showToast(msg: 'Failed to signup'); }
                 },
