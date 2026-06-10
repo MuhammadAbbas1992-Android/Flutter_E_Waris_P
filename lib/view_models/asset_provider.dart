@@ -1,59 +1,99 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
+
+import 'package:flutter/cupertino.dart';
 
 import '../data/models/asset_model.dart';
-import '../data/models/nominee_model.dart';
-import '../views/widgets/app_icons.dart';
-
+import '../data/repositories/asset_repository.dart';
+enum AssetStatus { initial, loading, loaded, saving, error }
 class AssetProvider extends ChangeNotifier {
+  final AssetRepository _repository;
 
-  List<AssetModel> get _assets => [
-  AssetModel(
-  name: 'Binance Wallet',
-  category: 'Crypto Wallet',
-  assignedTo: 'Ali Khan',
-  assignedColor: const Color(0xFF3B5BDB),
-  icon: BinanceIcon(),
-  ),
-  AssetModel(
-  name: 'Gmail Account',
-  category: 'Email Account',
-  assignedTo: 'Brother',
-  assignedColor: const Color(0xFF3B5BDB),
-  icon: GmailIcon(),
-  ),
-  AssetModel(
-  name: 'Hostinger Domain',
-  category: 'Domain & Hosting',
-  assignedTo: 'Wife',
-  assignedColor: const Color(0xFF3B5BDB),
-  icon: HostingerIcon(),
-  ),
-  AssetModel(
-  name: 'Facebook Account',
-  category: 'Social Media',
-  assignedTo: 'Ali Khan',
-  assignedColor: const Color(0xFF3B5BDB),
-  icon: FacebookIcon(),
-  ),
-  AssetModel(
-  name: 'WhatsApp Account',
-  category: 'Messaging',
-  assignedTo: 'Brother',
-  assignedColor: const Color(0xFF3B5BDB),
-  icon: WhatsAppIcon(),
-  ),
-  ];
+  AssetProvider({AssetRepository? repository})
+      : _repository = repository ?? AssetRepository();
+
+  StreamSubscription<List<AssetModel>>? _subscription;
+
+  List<AssetModel> _assets = [];
+  AssetStatus _status = AssetStatus.initial;
+  String? _errorMessage;
+
+  String? _userId;
+
   List<AssetModel> get assets => _assets;
-  AssetModel? _selectedAsset;
-  AssetModel? get selectedAsset => _selectedAsset;
+  AssetStatus get status => _status;
+  String? get errorMessage => _errorMessage;
 
-  void addAsset(AssetModel asset) {
-    _assets.add(asset);
+  bool get isLoading => _status == AssetStatus.loading;
+
+  // ✅ FIXED INIT
+  void init(String userId) {
+    if (userId.isEmpty) return;
+    if (_userId == userId) return;
+
+    _userId = userId;
+
+    _subscription?.cancel();
+
+    _status = AssetStatus.loading;
     notifyListeners();
+
+    _subscription = _repository.getAssets(userId).listen(
+          (data) {
+        _assets = data;
+        _status = AssetStatus.loaded;
+        notifyListeners();
+      },
+      onError: (e) {
+        _status = AssetStatus.error;
+        _errorMessage = e.toString();
+        notifyListeners();
+      },
+    );
   }
 
-  void setSelectedAsset(AssetModel asset) {
-    _selectedAsset = asset;
+  // ✅ CREATE / UPDATE
+  Future<bool> saveAsset(AssetModel asset) async {
+    if (_userId == null || _userId!.isEmpty) return false;
+    print('ABC save asset1');
+    _status = AssetStatus.saving;
     notifyListeners();
+    print('ABC save asset1');
+    try {
+      if (asset.id == null || asset.id!.isEmpty) {
+        print('ABC createAsset Called');
+        await _repository.createAsset(asset, _userId!);
+      } else {
+        print('ABC updateAsset Called');
+        await _repository.updateAsset(asset, _userId!);
+      }
+      _status = AssetStatus.loaded; // ✅ IMPORTANT
+      notifyListeners();
+      return true;
+    } catch (e) {
+      _status = AssetStatus.error;
+      _errorMessage = e.toString();
+      notifyListeners();
+      return false;
+    }
+  }
+
+  // ✅ DELETE
+  Future<bool> deleteAsset(String assetId) async {
+    if (_userId == null) return false;
+
+    try {
+      await _repository.deleteAsset(_userId!, assetId);
+      return true;
+    } catch (e) {
+      _errorMessage = e.toString();
+      notifyListeners();
+      return false;
+    }
+  }
+
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
   }
 }

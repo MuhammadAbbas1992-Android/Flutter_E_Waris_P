@@ -1,5 +1,4 @@
 import 'package:e_waris/core/constants/app_colors.dart';
-import 'package:e_waris/routes/app_routs.dart';
 import 'package:e_waris/views/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +12,7 @@ class AssetsScreen extends StatelessWidget {
   const AssetsScreen({super.key});
 
   static const Color _primaryBlue = Color(0xFF3B5BDB);
+
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +42,20 @@ class AssetsScreen extends StatelessWidget {
 
               // ── Asset List ──
               Expanded(
-                child: ListView.separated(
+                child: assetProvider.isLoading && assetProvider.assets.isEmpty
+                    ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+                    : assetProvider.assets.isEmpty
+                    ? const Center(
+                  child: Text("No assets found"),
+                )
+                    : ListView.separated(
                   itemCount: assetProvider.assets.length,
                   separatorBuilder: (_, __) => const SizedBox(height: 10),
                   itemBuilder: (context, index) {
                     final asset = assetProvider.assets[index];
-                    return CustomAssetCard(asset: asset);
+                    return CustomAssetCard(asset: asset,onTap: () => Navigator.pushNamed(context, RoutsName.addEditAssetScreen,arguments: asset.id));
                   },
                 ),
               ),
@@ -67,5 +75,3 @@ class AssetsScreen extends StatelessWidget {
     );
   }
 }
-
-// ─── Info Banner ──────────────────────────────────────────────────────────────

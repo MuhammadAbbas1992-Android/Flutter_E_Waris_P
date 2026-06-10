@@ -9,10 +9,29 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../core/constants/app_colors.dart';
+import '../core/utils/app_utils.dart';
+import '../view_models/asset_provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final assetProvider =
+      Provider.of<AssetProvider>(context, listen: false);
+
+      assetProvider.init(AppUtils.userId);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

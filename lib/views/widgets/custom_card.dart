@@ -26,8 +26,8 @@ class CustomCard extends StatelessWidget {
           child: Icon(Icons.inventory),
         ),
 
-        title: CustomText(text: assets.name),
-
+        // title: CustomText(text: assets.name),
+title: CustomText(text: 'Weldone'),
         subtitle: CustomText(
           text: assets.category!,
         ),

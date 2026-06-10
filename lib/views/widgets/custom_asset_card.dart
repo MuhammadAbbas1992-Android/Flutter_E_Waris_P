@@ -1,18 +1,20 @@
 import 'package:e_waris/core/constants/app_colors.dart';
+import 'package:e_waris/routes/routs_name.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/models/asset_model.dart';
+import 'app_icons.dart';
 
 class CustomAssetCard extends StatelessWidget {
   final AssetModel asset;
+  final VoidCallback? onTap;
 
-  const CustomAssetCard({super.key, required this.asset});
+  const CustomAssetCard({super.key, required this.asset,  this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
-      child: Container(
+      onTap:onTap, child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
         decoration: BoxDecoration(
           color: AppColors.white,
@@ -28,7 +30,7 @@ class CustomAssetCard extends StatelessWidget {
         child: Row(
           children: [
             // Icon
-            SizedBox(width: 48, height: 48, child: asset.icon),
+            SizedBox(width: 48, height: 48, child: BinanceIcon()),
             const SizedBox(width: 14),
 
             // Name & category
@@ -37,7 +39,7 @@ class CustomAssetCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    asset.name,
+                    asset.assetName,
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
@@ -58,15 +60,16 @@ class CustomAssetCard extends StatelessWidget {
                       const Icon(Icons.person_outline,
                           size: 14, color: Color(0xFF8A8FA8)),
                       const SizedBox(width: 4),
-                      const Text(
+                       Text(
                         'Assigned: ',
                         style: TextStyle(fontSize: 12, color: Color(0xFF8A8FA8)),
                       ),
-                      Text(
-                        asset.assignedTo,
+              Text(asset.nominee?.isNotEmpty == true
+                  ? asset.nominee!
+                  : 'Nil',
                         style: TextStyle(
                           fontSize: 12,
-                          color: asset.assignedColor,
+                        //  color: asset.assignedColor,
                           fontWeight: FontWeight.w600,
                         ),
                       ),

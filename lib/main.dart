@@ -1,3 +1,5 @@
+import 'package:e_waris/core/utils/app_utils.dart';
+import 'package:e_waris/view_models/add_edit_asset_provider.dart';
 import 'package:e_waris/view_models/asset_provider.dart';
 import 'package:e_waris/view_models/auth/auth_provider.dart';
 import 'package:e_waris/view_models/auth/forgot_password_provider.dart';
@@ -40,6 +42,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => HomeProvider()),
         ChangeNotifierProvider(create: (_) => DashboardProvider(),),
         ChangeNotifierProvider(create: (_) => AssetProvider()),
+        ChangeNotifierProvider(create: (_) => AddEditAssetProvider()),
         ChangeNotifierProvider(create: (_) => NomineeProvider()),
         ChangeNotifierProvider(create: (_) => NotificationsProvider()),
         ChangeNotifierProvider(create: (_) => EmergencyProvider()),
