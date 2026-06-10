@@ -47,9 +47,13 @@ class NomineesScreen extends StatelessWidget {
                       itemCount: nomineeProvider.nominees.length,
                       separatorBuilder: (_, __) => const SizedBox(height: 10),
                       itemBuilder: (context, index) {
-                        return CustomNomineeCard(
-                            nominee: nomineeProvider.nominees[index]);
-                      },
+                        final nominee = nomineeProvider.nominees[index];
+                        return CustomNomineeCard(nominee: nominee,
+                            onTap: () =>
+                                Navigator.pushNamed(
+                                    context, RoutsName.addEditNomineeScreen,
+                                    arguments: nominee.id));
+                      }
                     ),
                   ),
                   const SizedBox(height: 14),

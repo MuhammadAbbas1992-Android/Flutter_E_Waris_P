@@ -73,7 +73,7 @@ class DashboardScreen extends StatelessWidget {
                         icon: Icons.group_outlined,
                         iconBgColor: const Color(0xFFE6F9F0),
                         iconColor: const Color(0xFF2DB87C),
-                        value: '3',
+                        value: nominees.length.toString(),
                         label: 'Total Nominees',
                       ),
                     ),

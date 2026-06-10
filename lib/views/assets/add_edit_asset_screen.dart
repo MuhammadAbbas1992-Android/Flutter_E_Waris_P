@@ -138,21 +138,42 @@ class _AddEditAssetScreenState extends State<AddEditAssetScreen> {
 
             const SizedBox(height: 18),
             // SAVE
-            CustomButton1(btnText: 'Save Asset', onPressed: () async{
-              final ok = await addEditAssetProvider.saveAsset(AppUtils.userId);
-              if (!context.mounted) return;
-              if (ok) Navigator.pop(context);
-            },),
+            CustomButton1(
+              btnText: 'Save Asset',
+              onPressed: () async {
+                final ok = await addEditAssetProvider.saveAsset(
+                  AppUtils.userId,
+                );
+                if (!context.mounted) return;
+                if (ok) {
+                  Navigator.pop(context);
+                  AppUtils.showSnack(
+                    context: context,
+                    msg: 'Asset saved successfully',
+                  );
+                }
+              },
+            ),
 
             const SizedBox(height: 14),
             // DELETE
             if (addEditAssetProvider.isEditMode)
-            CustomButton1(btnText: 'Delete Asset', backgroundColor: AppColors.red.withOpacity(0.8),onPressed: () async {
-              final ok = await addEditAssetProvider.delete(AppUtils.userId);
-              if (!context.mounted) return;
-              if (ok) Navigator.pop(context);
-            }),
-            
+              CustomButton1(
+                btnText: 'Delete Asset',
+                backgroundColor: AppColors.red.withOpacity(0.8),
+                onPressed: () async {
+                  final ok = await addEditAssetProvider.delete(AppUtils.userId);
+                  if (!context.mounted) return;
+                  if (ok) {
+                    Navigator.pop(context);
+                    AppUtils.showSnack(
+                      context: context,
+                      msg: 'Asset deleted successfully',
+                    );
+                  }
+                },
+              ),
+            const SizedBox(height: 20),
           ],
         ),
       ),
@@ -532,22 +553,5 @@ Widget _buildNomineeDropdown({required AddEditAssetProvider provider}) {
         onChanged: (val) => provider.changeNominee(val),
       ),
     ),
-  );
-}
-
-// ---------------------------------------------
-//  BOTTOM NOTE
-// ---------------------------------------------
-Widget _buildBottomNote() {
-  return const Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Icon(Icons.shield_outlined, color: Colors.black38, size: 14),
-      SizedBox(width: 5),
-      Text(
-        'You can edit or delete this asset anytime.',
-        style: TextStyle(color: Colors.black45, fontSize: 12),
-      ),
-    ],
   );
 }

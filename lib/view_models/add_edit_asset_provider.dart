@@ -81,55 +81,30 @@ class AddEditAssetProvider extends ChangeNotifier {
   // ─────────────────────────────
   Future<bool> saveAsset(String userId) async {
     try {
-      AssetModel assetToSave;
-      print('ABC isEditMode $isEditMode');
-      if (isEditMode) {
-        assetToSave = asset!.copyWith(
-          assetName: assetNameCtrl.text.trim(),
-          category: selectedCategory,
-          websiteName: platformCtrl.text.trim(),
-          email: usernameCtrl.text.trim(),
-          password: recoveryHintCtrl.text.trim(),
-          importantNote: notesCtrl.text.trim(),
-          nominee: selectedNominee,
-        );
-        print('ABC Update Mode');
-        print('''
-Asset Debug:
-ID: ${assetToSave.id}
-Name: ${assetToSave.assetName}
-Category: ${assetToSave.category}
-Website: ${assetToSave.websiteName}
-Email: ${assetToSave.email}
-Password: ${assetToSave.password}
-Notes: ${assetToSave.importantNote}
-Nominee: ${assetToSave.nominee}
-''');
+      AssetModel assetToSave = isEditMode
+          ? asset!.copyWith(
+              assetName: assetNameCtrl.text.trim(),
+              category: selectedCategory,
+              websiteName: platformCtrl.text.trim(),
+              email: usernameCtrl.text.trim(),
+              password: recoveryHintCtrl.text.trim(),
+              importantNote: notesCtrl.text.trim(),
+              nominee: selectedNominee,
+            )
+          : AssetModel(
+              id: asset?.id,
+              assetName: assetNameCtrl.text.trim(),
+              category: selectedCategory,
+              websiteName: platformCtrl.text.trim(),
+              email: usernameCtrl.text.trim(),
+              password: recoveryHintCtrl.text.trim(),
+              importantNote: notesCtrl.text.trim(),
+              nominee: selectedNominee,
+            );
 
+      if (isEditMode) {
         await _repo.updateAsset(assetToSave, userId);
       } else {
-        assetToSave = AssetModel(
-          id: asset?.id,
-          assetName: assetNameCtrl.text.trim(),
-          category: selectedCategory,
-          websiteName: platformCtrl.text.trim(),
-          email: usernameCtrl.text.trim(),
-          password: recoveryHintCtrl.text.trim(),
-          importantNote: notesCtrl.text.trim(),
-          nominee: selectedNominee,
-        );
-        print('ABC Create Mode');
-        print('''
-Asset Debug:
-ID: ${assetToSave.id}
-Name: ${assetToSave.assetName}
-Category: ${assetToSave.category}
-Website: ${assetToSave.websiteName}
-Email: ${assetToSave.email}
-Password: ${assetToSave.password}
-Notes: ${assetToSave.importantNote}
-Nominee: ${assetToSave.nominee}
-''');
         await _repo.createAsset(assetToSave, userId);
       }
 
@@ -163,7 +138,7 @@ Nominee: ${assetToSave.nominee}
     recoveryHintCtrl.clear();
     notesCtrl.clear();
     changeCategory('Crypto Wallet');
-    selectedNominee=null;
+    selectedNominee = null;
   }
 
   // ─────────────────────────────
