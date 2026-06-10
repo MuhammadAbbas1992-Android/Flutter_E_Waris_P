@@ -47,7 +47,7 @@ class NomineesScreen extends StatelessWidget {
                       itemCount: nomineeProvider.nominees.length,
                       separatorBuilder: (_, __) => const SizedBox(height: 10),
                       itemBuilder: (context, index) {
-                        return NomineeCard(
+                        return CustomNomineeCard(
                             nominee: nomineeProvider.nominees[index]);
                       },
                     ),

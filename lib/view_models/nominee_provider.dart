@@ -1,58 +1,145 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
-import '../core/constants/app_colors.dart';
-import '../data/models/asset_model.dart';
 import '../data/models/nominee_model.dart';
+import '../data/repositories/nominee_repository.dart';
+
+enum NomineeStatus { initial, loading, loaded, saving, error }
 
 class NomineeProvider extends ChangeNotifier {
+  final NomineeRepository _repository;
 
-  List<NomineeModel> get _nominees => [
-    NomineeModel(
-      name: 'Ali Khan',
-      relation: 'Brother',
-      email: 'ali@gmail.com',
-      phone: '+92 300 1234567',
-      avatarBg: AppColors.lightGrey,
-      avatarIconColor: const Color(0xFF3B5BDB),
-      relationBadgeBg: const Color(0xFFE8EDFB),
-      relationBadgeText: const Color(0xFF3B5BDB), id: '',
-    ),
-    NomineeModel(
-      name: 'Ahmed Raza',
-      relation: 'Friend',
-      email: 'ahmedraza@gmail.com',
-      phone: '+92 321 1111111',
-      avatarBg: AppColors.lightGrey,
-      avatarIconColor: const Color(0xFFE05C5C),
-      relationBadgeBg: const Color(0xFFE6F9EE),
-      relationBadgeText: const Color(0xFF2DB87C), id: '',
-    ),
-    NomineeModel(
-      name: 'Sara Khan',
-      relation: 'Wife',
-      email: 'sarakhan@gmail.com',
-      phone: '+92 310 9876543',
-      avatarBg: const Color(0xFFFFEDE6),
-      avatarIconColor: const Color(0xFFE07840),
-      relationBadgeBg: const Color(0xFFFFEDE6),
-      relationBadgeText: const Color(0xFFE07840), id: '',
-    ),
-  ];
+  NomineeProvider({NomineeRepository? repository})
+    : _repository = repository ?? NomineeRepository();
 
+  StreamSubscription<List<NomineeModel>>? _subscription;
+
+  List<NomineeModel> _nominees = [];
+
+  NomineeStatus _status = NomineeStatus.initial;
+
+  String? _errorMessage;
+
+  String? _userId;
+
+  // ----------------------------------------
+  // GETTERS
+  // ----------------------------------------
 
   List<NomineeModel> get nominees => _nominees;
 
-  NomineeModel? _selectedNominee;
-  NomineeModel? get selectedNominee => _selectedNominee;
+  NomineeStatus get status => _status;
 
+  String? get errorMessage => _errorMessage;
 
-  void addNominee(NomineeModel nominee) {
-    _nominees.add(nominee);
+  bool get isLoading => _status == NomineeStatus.loading;
+
+  // ----------------------------------------
+  // INIT
+  // ----------------------------------------
+
+  void init(String userId) {
+    if (userId.isEmpty) return;
+
+    if (_userId == userId) return;
+
+    _userId = userId;
+
+    _subscription?.cancel();
+
+    _status = NomineeStatus.loading;
+
     notifyListeners();
+
+    _subscription = _repository
+        .getNominees(userId)
+        .listen(
+          (data) {
+            _nominees = data;
+            _status = NomineeStatus.loaded;
+            notifyListeners();
+          },
+          onError: (e) {
+            _status = NomineeStatus.error;
+            _errorMessage = e.toString();
+            notifyListeners();
+          },
+        );
   }
 
-  void removeNominee(String id) {
-    _nominees.removeWhere((e) => e.id == id);
+  // ----------------------------------------
+  // SAVE (CREATE + UPDATE)
+  // ----------------------------------------
+
+  Future<bool> saveNominee(NomineeModel nominee) async {
+    if (_userId == null || _userId!.isEmpty) {
+      return false;
+    }
+
+    _status = NomineeStatus.saving;
+
     notifyListeners();
+
+    try {
+      if (nominee.id == null || nominee.id!.isEmpty) {
+        await _repository.createNominee(nominee, _userId!);
+      } else {
+        await _repository.updateNominee(nominee, _userId!);
+      }
+
+      _status = NomineeStatus.loaded;
+
+      notifyListeners();
+
+      return true;
+    } catch (e) {
+      _status = NomineeStatus.error;
+      _errorMessage = e.toString();
+
+      notifyListeners();
+
+      return false;
+    }
+  }
+
+  // ----------------------------------------
+  // DELETE
+  // ----------------------------------------
+
+  Future<bool> deleteNominee(String nomineeId) async {
+    if (_userId == null || _userId!.isEmpty) {
+      return false;
+    }
+
+    try {
+      await _repository.deleteNominee(_userId!, nomineeId);
+
+      return true;
+    } catch (e) {
+      _errorMessage = e.toString();
+
+      notifyListeners();
+
+      return false;
+    }
+  }
+
+  // ----------------------------------------
+  // FIND BY ID
+  // ----------------------------------------
+
+  NomineeModel? getNomineeById(String id) {
+    try {
+      return _nominees.firstWhere((e) => e.id == id);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
   }
 }

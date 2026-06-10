@@ -1,5 +1,6 @@
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
+import 'package:e_waris/data/models/nominee_model.dart';
 import 'package:e_waris/view_models/home_provider.dart';
 import 'package:e_waris/views/assets/assets_screen.dart';
 import 'package:e_waris/views/dashboard_screen.dart';
@@ -28,6 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final assetProvider =
       Provider.of<AssetProvider>(context, listen: false);
+      /*final nomineeProvider =
+      Provider.of<NomineeModel>(context, listen: false);*/
 
       assetProvider.init(AppUtils.userId);
     });

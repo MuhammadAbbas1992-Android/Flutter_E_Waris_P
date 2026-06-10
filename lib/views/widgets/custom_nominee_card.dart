@@ -1,11 +1,15 @@
+import 'package:e_waris/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/models/nominee_model.dart';
 
-class NomineeCard extends StatelessWidget {
+class CustomNomineeCard extends StatelessWidget {
   final NomineeModel nominee;
+  final VoidCallback? onTap;
 
-  const NomineeCard({super.key, required this.nominee});
+  const CustomNomineeCard({super.key,
+    required this.nominee,
+    this.onTap,});
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +36,14 @@ class NomineeCard extends StatelessWidget {
               width: 52,
               height: 52,
               decoration: BoxDecoration(
-                color: nominee.avatarBg,
+                color: AppColors.primary,
                 shape: BoxShape.circle,
               ),
-              child: Icon(Icons.person, color: nominee.avatarIconColor, size: 28),
+              child: Icon(
+                Icons.person,
+                color: AppColors.white,
+                size: 28,
+              ),
             ),
             const SizedBox(width: 14),
 
@@ -61,17 +69,20 @@ class NomineeCard extends StatelessWidget {
 
                   // Relation badge
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 3,
+                    ),
                     decoration: BoxDecoration(
-                      color: nominee.relationBadgeBg,
+                      color: AppColors.primary,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
-                      nominee.relation,
+                      nominee.relationship,
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
-                        color: nominee.relationBadgeText,
+                        color: AppColors.white,
                       ),
                     ),
                   ),
@@ -80,8 +91,11 @@ class NomineeCard extends StatelessWidget {
                   // Email
                   Row(
                     children: [
-                      const Icon(Icons.email_outlined,
-                          size: 14, color: Color(0xFF8A8FA8)),
+                      const Icon(
+                        Icons.email_outlined,
+                        size: 14,
+                        color: Color(0xFF8A8FA8),
+                      ),
                       const SizedBox(width: 6),
                       Text(
                         nominee.email,
@@ -97,8 +111,11 @@ class NomineeCard extends StatelessWidget {
                   // Phone
                   Row(
                     children: [
-                      const Icon(Icons.phone_outlined,
-                          size: 14, color: Color(0xFF8A8FA8)),
+                      const Icon(
+                        Icons.phone_outlined,
+                        size: 14,
+                        color: Color(0xFF8A8FA8),
+                      ),
                       const SizedBox(width: 6),
                       Text(
                         nominee.phone,

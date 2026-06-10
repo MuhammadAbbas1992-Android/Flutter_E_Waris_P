@@ -1,6 +1,9 @@
 import 'package:e_waris/core/constants/app_colors.dart';
 import 'package:e_waris/view_models/dashboard_provider.dart';
+import 'package:e_waris/view_models/nominee_provider.dart';
 import 'package:e_waris/views/widgets/custom_asset_card.dart';
+import 'package:e_waris/views/widgets/custom_divider.dart';
+import 'package:e_waris/views/widgets/custom_nominee_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,13 +15,19 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final assetProvider = Provider.of<AssetProvider>(context);
+    final nomineeProvider = Provider.of<NomineeProvider>(context);
 
     final assets = assetProvider.assets;
+    final nominees = nomineeProvider.nominees;
 
     // safe recent 3 assets
     final recentAssets = assets.length > 3
         ? assets.sublist(0, 3)
         : assets;
+    // safe recent 3 assets
+    final recentNominees = nominees.length > 3
+        ? nominees.sublist(0, 3)
+        : nominees;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -169,13 +178,12 @@ class DashboardScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
 
-
                 // ── Asset List ──
                 // ── LOADING / EMPTY / LIST ──
                 if (assetProvider.isLoading && assets.isEmpty)
                   const Center(child: CircularProgressIndicator())
                 else if (assets.isEmpty)
-                  const Center(child: Text("No assets found"))
+                  const Center(child: Text("No asset found"))
                 else
                   ListView.separated(
                     shrinkWrap: true,
@@ -187,6 +195,55 @@ class DashboardScreen extends StatelessWidget {
                       return CustomAssetCard(asset: asset);
                     },
                   ),
+                const SizedBox(height: 24),
+                CustomDivider(color: AppColors.darkGrey,),
+                const SizedBox(height: 24),
+
+                // Recent Assets Header
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Recent Assets',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () => context.read<HomeProvider>().changeIndex(2),
+                      child: const Text(
+                        'View All',
+                        style: TextStyle(
+                          color: AppColors.primary,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+
+                // ── Nominee List ──
+                // ── LOADING / EMPTY / LIST ──
+                if (nomineeProvider.isLoading && nominees.isEmpty)
+                  const Center(child: CircularProgressIndicator())
+                else if (nominees.isEmpty)
+                  const Center(child: Text("No nominee found"))
+                else
+                  ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: recentNominees.length,
+                    separatorBuilder: (_, __) => const SizedBox(height: 10),
+                    itemBuilder: (context, index) {
+                      final nominee = recentNominees[index];
+                      return CustomNomineeCard( nominee: nominee,);
+                    },
+                  ),
+
                 const SizedBox(height: 100),
               ],
             ),
